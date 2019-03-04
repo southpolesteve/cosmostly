@@ -1,8 +1,8 @@
 {
   "name": "cosmostly",
-  "version": "1.0.0",
-  "description": "JavaScript based Cosmos DB Emulator",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Minimal Cosmos DB SQL API Emulator",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib --extensions '.ts'",
     "compile": "tsc",
@@ -43,5 +43,6 @@
     "cors": "2.8.5",
     "express": "4.16.4",
     "morgan": "1.9.1"
-  }
+  },
+  "bin": "./lib/index.js"
 }

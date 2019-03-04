@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import { app } from './server'
 const port = 8082
 
