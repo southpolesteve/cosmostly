@@ -18,7 +18,6 @@ describe('Items', () => {
       const id = generateId()
       const res = await createItem(databaseId, containerId, id)
       const body = await res.json()
-      console.log(body)
       expect(res.status).toEqual(201)
       expect(body.id).toEqual(id)
     })
@@ -35,7 +34,6 @@ describe('Items', () => {
       )
       expect(res.status).toEqual(200)
       const body = await res.json()
-      console.log(body)
       expect(body.Documents).toBeDefined()
     })
   })
@@ -53,7 +51,24 @@ describe('Items', () => {
       )
       expect(res.status).toEqual(200)
       const body = await res.json()
-      console.log(body)
+      expect(body.id).toEqual(id)
+    })
+  })
+  describe('replace', () => {
+    it('valid request', async () => {
+      const id = generateId()
+      await createItem(databaseId, containerId, id)
+      const res = await request(
+        `/dbs/${databaseId}/colls/${containerId}/docs/${id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({ id, foo: 'bar' }),
+          resource: 'docs',
+          resourceId: `dbs/${databaseId}/colls/${containerId}/docs/${id}`
+        }
+      )
+      const body = await res.json()
+      expect(res.status).toEqual(200)
       expect(body.id).toEqual(id)
     })
   })

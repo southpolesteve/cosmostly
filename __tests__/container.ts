@@ -40,6 +40,21 @@ describe('Containers', () => {
       expect(body.id).toEqual(id)
     })
   })
+  describe('update', () => {
+    it('valid request', async () => {
+      const id = generateId()
+      await createContainer(databaseId, id)
+      const res = await request(`/dbs/${databaseId}/colls/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ id, foo: 'bar' }),
+        resource: 'colls',
+        resourceId: `dbs/${databaseId}/colls/${id}`
+      })
+      const body = await res.json()
+      expect(res.status).toEqual(200)
+      expect(body.id).toEqual(id)
+    })
+  })
   describe('delete', () => {
     it('valid request', async () => {
       const id = generateId()

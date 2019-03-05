@@ -17,6 +17,8 @@ import { listItems } from './handlers/listItems'
 import { createItem } from './handlers/createItem'
 import { getItem } from './handlers/getItem'
 import { deleteItem } from './handlers/deleteItem'
+import { replaceContainer } from './handlers/replaceContainer'
+import { replaceItem } from './handlers/replaceItem'
 
 const app = express()
 
@@ -46,14 +48,14 @@ app.delete('/dbs/:database', deleteDatabase)
 app.get('/dbs/:database/colls', listContainers)
 app.post('/dbs/:database/colls', createContainer)
 app.get('/dbs/:database/colls/:container', getContainer)
-// app.put('/dbs/:database/colls/:container', notYetSupported)
+app.put('/dbs/:database/colls/:container', replaceContainer)
 app.delete('/dbs/:database/colls/:container', deleteContainer)
 
 // Items
 app.get('/dbs/:database/colls/:container/docs', listItems)
 app.post('/dbs/:database/colls/:container/docs', createItem)
 app.get('/dbs/:database/colls/:container/docs/:id', getItem)
-// app.put('/dbs/:database/colls/:container/docs/:id', notYetSupported)
+app.put('/dbs/:database/colls/:container/docs/:id', replaceItem)
 app.delete('/dbs/:database/colls/:container/docs/:id', deleteItem)
 
 // Not supported
