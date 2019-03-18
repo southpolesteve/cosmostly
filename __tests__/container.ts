@@ -6,6 +6,8 @@ import {
   deleteDatabase
 } from './helper'
 
+jest.setTimeout(20000)
+
 describe('Containers', () => {
   const databaseId: string = generateId()
   const id = generateId()

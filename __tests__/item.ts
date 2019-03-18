@@ -7,6 +7,8 @@ import {
   deleteDatabase
 } from './helper'
 
+jest.setTimeout(20000)
+
 describe('Items', () => {
   let databaseId: string = generateId()
   let containerId: string = generateId()

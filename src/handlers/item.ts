@@ -5,8 +5,7 @@ const staticAttributes = {
   _rid: 'oy1YAOT3tN8BAAAAAAAAAA==',
   _self: 'dbs/oy1YAA==/colls/oy1YAOT3tN8=/docs/oy1YAOT3tN8BAAAAAAAAAA==/',
   _etag: '"00000000-0000-0000-d2ba-ccf9b22301d4"',
-  _attachments: 'attachments/',
-  _ts: 1551725284
+  _attachments: 'attachments/'
 }
 
 export function create(request: Request, response: Response) {
