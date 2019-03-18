@@ -3,7 +3,8 @@ import {
   generateId,
   createDatabase,
   createContainer,
-  createItem
+  createItem,
+  deleteDatabase
 } from './helper'
 
 describe('Items', () => {
@@ -13,13 +14,17 @@ describe('Items', () => {
     await createDatabase(databaseId)
     await createContainer(databaseId, containerId)
   })
+  afterAll(async () => {
+    await deleteDatabase(databaseId)
+  })
   describe('create', () => {
     it('valid request', async () => {
       const id = generateId()
-      const res = await createItem(databaseId, containerId, id)
+      const res = await createItem(databaseId, containerId, id, { foo: 'bar' })
       const body = await res.json()
       expect(res.status).toEqual(201)
       expect(body.id).toEqual(id)
+      expect(body.foo).toEqual('bar')
     })
   })
   describe('list', () => {
@@ -62,7 +67,7 @@ describe('Items', () => {
         `/dbs/${databaseId}/colls/${containerId}/docs/${id}`,
         {
           method: 'PUT',
-          body: JSON.stringify({ id, foo: 'bar' }),
+          body: JSON.stringify({ id, foo: 'baz' }),
           resource: 'docs',
           resourceId: `dbs/${databaseId}/colls/${containerId}/docs/${id}`
         }
@@ -70,6 +75,7 @@ describe('Items', () => {
       const body = await res.json()
       expect(res.status).toEqual(200)
       expect(body.id).toEqual(id)
+      expect(body.foo).toEqual('baz')
     })
   })
   describe('delete', () => {

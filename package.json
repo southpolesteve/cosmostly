@@ -7,7 +7,7 @@
     "build": "babel src -d lib --extensions '.ts'",
     "compile": "tsc",
     "test": "jest",
-    "start": "nodemon --exec babel-node --extensions '.ts' src/index.ts",
+    "start": "nodemon --exec babel-node --extensions '.ts' src/index.ts --ignore db.json",
     "server": "babel-node --extensions \".ts\" ./src/index.ts"
   },
   "keywords": [
@@ -40,8 +40,10 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
+    "@types/lowdb": "1.0.7",
     "cors": "2.8.5",
     "express": "4.16.4",
+    "lowdb": "1.0.0",
     "morgan": "1.9.1"
   },
   "bin": "./lib/index.js"

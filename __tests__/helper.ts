@@ -32,6 +32,14 @@ export const createDatabase = (id?: string) => {
   })
 }
 
+export const deleteDatabase = (id: string) => {
+  return request(`/dbs/${id}`, {
+    method: 'DELETE',
+    resource: 'dbs',
+    resourceId: `dbs/${id}`
+  })
+}
+
 export const createContainer = (databaseId: string, id?: string) => {
   if (!id) id = generateId()
   return request(`/dbs/${databaseId}/colls`, {
@@ -42,15 +50,23 @@ export const createContainer = (databaseId: string, id?: string) => {
   })
 }
 
+export const deleteContainer = (databaseId: string, id: string) => {
+  return request(`/dbs/${databaseId}/colls/${id}`, {
+    method: 'DELETE',
+    resource: 'colls',
+    resourceId: `dbs/${databaseId}/colls/${id}`
+  })
+}
+
 export const createItem = (
   databaseId: string,
   containerId: string,
-  id?: string
+  id: string = generateId(),
+  attributes: any = {}
 ) => {
-  if (!id) id = generateId()
   return request(`/dbs/${databaseId}/colls/${containerId}/docs`, {
     method: 'POST',
-    body: JSON.stringify({ id }),
+    body: JSON.stringify({ id, ...attributes }),
     resource: 'docs',
     resourceId: `dbs/${databaseId}/colls/${containerId}`
   })

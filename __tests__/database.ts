@@ -1,9 +1,9 @@
-import { request, generateId, createDatabase } from './helper'
+import { request, generateId, createDatabase, deleteDatabase } from './helper'
 
 describe('Databases', () => {
+  const id = generateId()
   describe('create', () => {
     it('valid request', async () => {
-      const id = generateId()
       const res = await createDatabase(id)
       expect(res.status).toEqual(201)
       const body = await res.json()
@@ -23,8 +23,6 @@ describe('Databases', () => {
   })
   describe('get', () => {
     it('valid request', async () => {
-      const id = generateId()
-      await createDatabase(id)
       const res = await request(`/dbs/${id}`, {
         method: 'GET',
         resource: 'dbs',
@@ -37,13 +35,7 @@ describe('Databases', () => {
   })
   describe('delete', () => {
     it('valid request', async () => {
-      const id = generateId()
-      await createDatabase(id)
-      const res = await request(`/dbs/${id}`, {
-        method: 'DELETE',
-        resource: 'dbs',
-        resourceId: `dbs/${id}`
-      })
+      const res = await deleteDatabase(id)
       expect(res.status).toEqual(204)
     })
   })

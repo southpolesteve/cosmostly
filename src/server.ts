@@ -5,24 +5,13 @@ import { getDatabaseAccount } from './handlers/getDatabaseAccount'
 import { notSupported } from './handlers/notSupported'
 import { checkAuthHeader } from './middleware/checkAuthHeader'
 import { checkAPIVersionHeader } from './middleware/checkAPIVersionHeader'
-import { createDatabase } from './handlers/createDatabase'
-import { getDatabase } from './handlers/getDatabase'
-import { listDatabases } from './handlers/listDatabases'
-import { deleteDatabase } from './handlers/deleteDatabase'
-import { createContainer } from './handlers/createContainer'
-import { getContainer } from './handlers/getContainer'
-import { deleteContainer } from './handlers/deleteContainer'
-import { listContainers } from './handlers/listContainers'
-import { listItems } from './handlers/listItems'
-import { createItem } from './handlers/createItem'
-import { getItem } from './handlers/getItem'
-import { deleteItem } from './handlers/deleteItem'
-import { replaceContainer } from './handlers/replaceContainer'
-import { replaceItem } from './handlers/replaceItem'
+import * as database from './handlers/database'
+import * as container from './handlers/container'
+import * as item from './handlers/item'
 
 const app = express()
 
-// Setup Loggin
+// Setup Logging
 app.use(morgan('dev'))
 app.use(json({ type: '*/*' }))
 
@@ -39,24 +28,24 @@ app.use(checkAPIVersionHeader())
 app.get('/', getDatabaseAccount)
 
 // Databases
-app.get('/dbs', listDatabases)
-app.post('/dbs', createDatabase)
-app.get('/dbs/:database', getDatabase)
-app.delete('/dbs/:database', deleteDatabase)
+app.get('/dbs', database.list)
+app.post('/dbs', database.create)
+app.get('/dbs/:database', database.get)
+app.delete('/dbs/:database', database.destroy)
 
 // Containers
-app.get('/dbs/:database/colls', listContainers)
-app.post('/dbs/:database/colls', createContainer)
-app.get('/dbs/:database/colls/:container', getContainer)
-app.put('/dbs/:database/colls/:container', replaceContainer)
-app.delete('/dbs/:database/colls/:container', deleteContainer)
+app.get('/dbs/:database/colls', container.list)
+app.post('/dbs/:database/colls', container.create)
+app.get('/dbs/:database/colls/:container', container.get)
+app.put('/dbs/:database/colls/:container', container.replace)
+app.delete('/dbs/:database/colls/:container', container.destroy)
 
 // Items
-app.get('/dbs/:database/colls/:container/docs', listItems)
-app.post('/dbs/:database/colls/:container/docs', createItem)
-app.get('/dbs/:database/colls/:container/docs/:id', getItem)
-app.put('/dbs/:database/colls/:container/docs/:id', replaceItem)
-app.delete('/dbs/:database/colls/:container/docs/:id', deleteItem)
+app.get('/dbs/:database/colls/:container/docs', item.list)
+app.post('/dbs/:database/colls/:container/docs', item.create)
+app.get('/dbs/:database/colls/:container/docs/:id', item.get)
+app.put('/dbs/:database/colls/:container/docs/:id', item.replace)
+app.delete('/dbs/:database/colls/:container/docs/:id', item.destroy)
 
 // Not supported
 app.all('/dbs/:database/users/', notSupported)

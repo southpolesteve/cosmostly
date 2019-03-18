@@ -1,13 +1,22 @@
-import { request, generateId, createDatabase, createContainer } from './helper'
+import {
+  request,
+  generateId,
+  createDatabase,
+  createContainer,
+  deleteDatabase
+} from './helper'
 
 describe('Containers', () => {
-  let databaseId: string = generateId()
+  const databaseId: string = generateId()
+  const id = generateId()
   beforeAll(async () => {
     await createDatabase(databaseId)
   })
+  afterAll(async () => {
+    await deleteDatabase(databaseId)
+  })
   describe('create', () => {
     it('valid request', async () => {
-      const id = generateId()
       const res = await createContainer(databaseId, id)
       const body = await res.json()
       expect(res.status).toEqual(201)
@@ -28,7 +37,6 @@ describe('Containers', () => {
   })
   describe('get', () => {
     it('valid request', async () => {
-      const id = generateId()
       await createContainer(databaseId, id)
       const res = await request(`/dbs/${databaseId}/colls/${id}`, {
         method: 'GET',
@@ -42,7 +50,6 @@ describe('Containers', () => {
   })
   describe('update', () => {
     it('valid request', async () => {
-      const id = generateId()
       await createContainer(databaseId, id)
       const res = await request(`/dbs/${databaseId}/colls/${id}`, {
         method: 'PUT',
@@ -57,7 +64,6 @@ describe('Containers', () => {
   })
   describe('delete', () => {
     it('valid request', async () => {
-      const id = generateId()
       await createContainer(databaseId, id)
       const res = await request(`/dbs/${databaseId}/colls/${id}`, {
         method: 'DELETE',
