@@ -4,7 +4,7 @@ import { EMULATOR_KEY } from '../src/constants'
 import { generateHeaders } from '@azure/cosmos-sign'
 import { randomBytes } from 'crypto'
 
-const url = process.env.EMULATOR_URL || 'https://localhost:8081'
+export const url = process.env.EMULATOR_URL || 'https://localhost:8081'
 
 let agent: Agent
 if (url.includes('https:')) {
