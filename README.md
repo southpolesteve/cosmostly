@@ -2,6 +2,8 @@
 
 ### ⚠️ WARNING: THIS IS NOT READY TO USE AND UNDER HEAVY DEVELOPMENT ⚠️
 
+### Use https://github.com/zeit/cosmosdb-server instead of this project
+
 [![Build Status](https://dev.azure.com/stfaul/Cosmostly/_apis/build/status/Cosmostly-CI?branchName=master)](https://dev.azure.com/stfaul/Cosmostly/_build/latest?definitionId=2&branchName=master)
 
 A minimal JavaScript emulator for Cosmos DB SQL API. If you need full accuracy use the [offical emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator)
