@@ -36,7 +36,7 @@
     "@types/node-fetch": "2.1.6",
     "babel-jest": "24.1.0",
     "jest": "24.1.0",
-    "node-fetch": "2.3.0",
+    "node-fetch": "2.6.7",
     "nodemon": "1.18.10",
     "typescript": "3.3.3333"
   },
