@@ -43,7 +43,7 @@
   "dependencies": {
     "@types/lowdb": "1.0.7",
     "cors": "2.8.5",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "lowdb": "1.0.0",
     "morgan": "1.9.1"
   },
